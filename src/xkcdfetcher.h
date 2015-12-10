@@ -6,6 +6,8 @@
 class QNetworkAccessManager;
 class QNetworkReply;
 
+class XKCDComic;
+
 class XKCDFetcher : public QObject
 {
     Q_OBJECT
@@ -15,11 +17,17 @@ public:
     Q_INVOKABLE void getLatest();
     Q_INVOKABLE void getForId(const int id);
 
+    Q_INVOKABLE XKCDComic *lastFetchedComic() const { return comic_; }
+
 private slots:
-    void replyFinished(QNetworkReply* reply);
+    void replyFinished(QNetworkReply *reply);
+
+signals:
+    void comicReady();
 
 private:
-    QNetworkAccessManager* networkManager_;
+    QNetworkAccessManager *networkManager_;
+    XKCDComic *comic_;
 };
 
 #endif // XKCDFETCHER_H

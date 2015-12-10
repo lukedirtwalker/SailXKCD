@@ -2,9 +2,12 @@
 
 #include <QtCore/QDebug>
 #include <QtCore/QJsonDocument>
+#include <QtCore/QJsonObject>
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
+
+#include "xkcdcomic.h"
 
 static const QUrl latestUrl_{"http://xkcd.com/info.0.json"};
 static const QString idAddress_{"http://xkcd.com/%1/info.0.json"};
@@ -34,6 +37,7 @@ void XKCDFetcher::replyFinished(QNetworkReply* reply)
     }
     auto jsonDoc = QJsonDocument::fromJson(reply->readAll());
     if (jsonDoc.isObject()) {
-        qDebug() << "isObject";
+        comic_ = XKCDComic::fromJson(jsonDoc.object());
+        emit comicReady();
     }
 }

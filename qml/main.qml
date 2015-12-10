@@ -30,10 +30,30 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import SailXKCD 1.0
+
 ApplicationWindow
 {
+    property XKCDComic comic : null;
+
     Component.onCompleted: {
         xkcdFetcher.getLatest();
+    }
+
+    Connections {
+        target: xkcdFetcher
+        onComicReady: {
+            comic = xkcdFetcher.lastFetchedComic();
+        }
+    }
+
+    PageHeader {
+        title: comic ? comic.title : ""
+    }
+
+    Image {
+        anchors.centerIn: parent
+        source: comic ? comic.imgSource : ""
     }
 }
 

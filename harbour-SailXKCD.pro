@@ -18,7 +18,8 @@ QT += network
 
 SOURCES += \
     src/main.cpp \
-    src/xkcdfetcher.cpp
+    src/xkcdfetcher.cpp \
+    src/xkcdcomic.cpp
 
 OTHER_FILES += \
     rpm/harbour-SailXKCD.changes.in \
@@ -34,5 +35,6 @@ CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-SailXKCD-de.ts
 
 HEADERS += \
-    src/xkcdfetcher.h
+    src/xkcdfetcher.h \
+    src/xkcdcomic.h
 

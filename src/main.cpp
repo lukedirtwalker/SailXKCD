@@ -2,6 +2,7 @@
 #include <sailfishapp.h>
 
 #include "xkcdfetcher.h"
+#include "xkcdcomic.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,6 +15,8 @@ int main(int argc, char *argv[])
     QQuickView *view = SailfishApp::createView();
 
     view->rootContext()->setContextProperty("xkcdFetcher", new XKCDFetcher);
+
+    qmlRegisterType<XKCDComic>("SailXKCD", 1, 0, "XKCDComic");
 
     view->setSource(SailfishApp::pathTo("qml/main.qml"));
     view->show();
